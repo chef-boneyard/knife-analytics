@@ -19,10 +19,10 @@ require 'chef-analytics'
 
 class Chef
   class Knife
-    class AuditsShow < ChefAnalytics::Knife
+    class AuditShow < ChefAnalytics::Knife
       category "CHEF ANALYTICS"
 
-      banner "knife audits show <id>"
+      banner "knife audit show <id>"
 
       option :identity_server_url,
         :long         => "--identity-server-url HOST",

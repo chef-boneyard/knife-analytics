@@ -20,10 +20,10 @@ require 'chef-analytics'
 
 class Chef
   class Knife
-    class ActionsList < ChefAnalytics::Knife
+    class ActionList < ChefAnalytics::Knife
       category "CHEF ANALYTICS"
 
-      banner "knife actions list"
+      banner "knife action list"
 
       option :identity_server_url,
         :long         => "--identity-server-url HOST",
@@ -54,7 +54,7 @@ class Chef
       def run
         validate_and_set_params
 
-        @rest = ChefAnalytics::ServerAPI.new(@analytics_server_url, fetch_token)
+        @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
 
         actions = @rest.get("actions#{query_params}")
         output(actions)

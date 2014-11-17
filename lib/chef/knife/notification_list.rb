@@ -20,10 +20,10 @@ require 'chef-analytics'
 
 class Chef
   class Knife
-    class RulesList < ChefAnalytics::Knife
+    class NotificationList < ChefAnalytics::Knife
       category "CHEF ANALYTICS"
 
-      banner "knife rules list"
+      banner "knife notification list"
 
       option :identity_server_url,
         :long         => "--identity-server-url HOST",
@@ -36,10 +36,10 @@ class Chef
       def run
         validate_and_set_params
 
-        @rest = ChefAnalytics::ServerAPI.new(@analytics_server_url, fetch_token)
+        @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
 
-        rules = @rest.get("rules")
-        output(rules)
+        notifications = @rest.get("aliases")
+        output(notifications)
       end
 
       private
