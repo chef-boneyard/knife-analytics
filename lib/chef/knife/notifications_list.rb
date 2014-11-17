@@ -20,10 +20,10 @@ require 'chef-analytics'
 
 class Chef
   class Knife
-    class RulesList < ChefAnalytics::Knife
+    class NotificationsList < ChefAnalytics::Knife
       category "CHEF ANALYTICS"
 
-      banner "knife rules list"
+      banner "knife notifications list"
 
       option :identity_server_url,
         :long         => "--identity-server-url HOST",
@@ -38,8 +38,8 @@ class Chef
 
         @rest = ChefAnalytics::ServerAPI.new(@analytics_server_url, fetch_token)
 
-        rules = @rest.get("rules")
-        output(rules)
+        notifications = @rest.get("aliases")
+        output(notifications)
       end
 
       private
