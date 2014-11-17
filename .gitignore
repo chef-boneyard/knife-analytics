@@ -1,0 +1,6 @@
+.bundle/
+.chef
+bin/
+pkg/
+rdoc/
+*.gem
