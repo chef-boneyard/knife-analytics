@@ -21,6 +21,7 @@ require 'chef-analytics'
 class Chef
   class Knife
     class RulesList < ChefAnalytics::Knife
+      category "CHEF ANALYTICS"
 
       banner "knife rules list"
 

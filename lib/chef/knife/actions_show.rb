@@ -20,6 +20,10 @@ require 'chef-analytics'
 class Chef
   class Knife
     class ActionsShow < ChefAnalytics::Knife
+      category "CHEF ANALYTICS"
+
+      banner "knife actions show <id>"
+
       option :identity_server_url,
         :long         => "--identity-server-url HOST",
         :description  => "URL of Chef identity server to use"
@@ -27,8 +31,6 @@ class Chef
       option :analytics_server_url,
         :long         => "--analytics-server-url HOST",
         :description  => "URL of Chef analytics server to use"
-
-      banner "knife actions show <id>"
 
       def run
         validate_and_set_params

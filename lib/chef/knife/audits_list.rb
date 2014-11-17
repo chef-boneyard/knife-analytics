@@ -21,6 +21,7 @@ require 'chef-analytics'
 class Chef
   class Knife
     class AuditsList < ChefAnalytics::Knife
+      category "CHEF ANALYTICS"
 
       banner "knife audits list"
 
