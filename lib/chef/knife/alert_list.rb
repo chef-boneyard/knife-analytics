@@ -19,10 +19,10 @@ require 'chef-analytics'
 
 class Chef
   class Knife
-    class AuditList < ChefAnalytics::Knife
+    class AlertList < ChefAnalytics::Knife
       category "CHEF ANALYTICS"
 
-      banner "knife audit list"
+      banner "knife alert list"
 
       option :identity_server_url,
         :long         => "--identity-server-url HOST",
@@ -36,13 +36,13 @@ class Chef
         :long => '--since TIME',
         :short => '-s TIME',
         :required => false,
-        :description => 'Find audits since the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
+        :description => 'Find alerts since the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
 
       option :before,
         :long => '--before TIME',
         :short => '-b TIME',
         :required => false,
-        :description => 'Find audits before the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
+        :description => 'Find alerts before the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
 
       option :page,
         :long => '--page N',
@@ -55,8 +55,8 @@ class Chef
 
         @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
 
-        audits = @rest.get("audits#{query_params}")
-        output(audits)
+        alerts = @rest.get("alerts#{query_params}")
+        output(alerts)
       end
 
       private

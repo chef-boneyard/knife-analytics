@@ -19,10 +19,10 @@ require 'chef-analytics'
 
 class Chef
   class Knife
-    class AuditShow < ChefAnalytics::Knife
+    class AlertShow < ChefAnalytics::Knife
       category "CHEF ANALYTICS"
 
-      banner "knife audit show <id>"
+      banner "knife alert show <id>"
 
       option :identity_server_url,
         :long         => "--identity-server-url HOST",
@@ -44,7 +44,7 @@ class Chef
 
         @rest = ChefAnalytics::ServerAPI.new(analytics_server_root, fetch_token)
 
-        action = @rest.get("audits/#{run_id}")
+        action = @rest.get("alerts/#{run_id}")
         output(action)
       end
     end
