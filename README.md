@@ -12,6 +12,7 @@ This plugin provides the following new Knife sub-commands:
 ** CHEF ANALYTICS COMMANDS **
 knife action list
 knife action show <id>
+knife analytics raw <request_path>
 knife audit list
 knife audit show <id>
 knife notification list
