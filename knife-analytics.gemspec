@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.license = "Apache 2"
   s.author = "Chef Software, Inc."
   s.email = "info@getchef.com"
-  s.homepage = "http://www.getchef.com/"
+  s.homepage = "https://github.com/chef/knife-analytics"
 
   s.add_dependency "chef-analytics", "~> 0.1"
 
