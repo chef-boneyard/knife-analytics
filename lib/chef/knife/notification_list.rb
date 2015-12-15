@@ -17,33 +17,30 @@
 
 require 'chef-analytics'
 
-class Chef
-  class Knife
-    class NotificationList < ChefAnalytics::Knife
-      category "CHEF ANALYTICS"
+module KnifeAnalytics
+  class NotificationList < KnifeAnalytics::Knife
+    category "CHEF ANALYTICS"
 
-      banner "knife notification list"
+    banner "knife notification list"
 
-      option :identity_server_url,
-        :long         => "--identity-server-url HOST",
-        :description  => "URL of Chef identity server to use"
+    option :identity_server_url,
+      :long         => "--identity-server-url HOST",
+      :description  => "URL of Chef identity server to use"
 
-      option :analytics_server_url,
-        :long         => "--analytics-server-url HOST",
-        :description  => "URL of Chef analytics server to use"
+    option :analytics_server_url,
+      :long         => "--analytics-server-url HOST",
+      :description  => "URL of Chef analytics server to use"
 
-      def run
-        validate_and_set_params
+    def run
+      validate_and_set_params
 
-        @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
+      @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
 
-        notifications = @rest.get("aliases")
-        output(notifications)
-      end
-
-      private
-
+      notifications = @rest.get("aliases")
+      output(notifications)
     end
+
+    private
+
   end
 end
-
