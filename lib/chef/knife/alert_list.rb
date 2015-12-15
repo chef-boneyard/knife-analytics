@@ -17,60 +17,57 @@
 
 require 'chef-analytics'
 
-class Chef
-  class Knife
-    class AlertList < ChefAnalytics::Knife
-      category "CHEF ANALYTICS"
+module KnifeAnalytics
+  class AlertList < KnifeAnalytics::Knife
+    category "CHEF ANALYTICS"
 
-      banner "knife alert list"
+    banner "knife alert list"
 
-      option :identity_server_url,
-        :long         => "--identity-server-url HOST",
-        :description  => "URL of Chef identity server to use"
+    option :identity_server_url,
+      :long         => "--identity-server-url HOST",
+      :description  => "URL of Chef identity server to use"
 
-      option :analytics_server_url,
-        :long         => "--analytics-server-url HOST",
-        :description  => "URL of Chef analytics server to use"
+    option :analytics_server_url,
+      :long         => "--analytics-server-url HOST",
+      :description  => "URL of Chef analytics server to use"
 
-      option :since,
-        :long => '--since TIME',
-        :short => '-s TIME',
-        :required => false,
-        :description => 'Find alerts since the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
+    option :since,
+      :long => '--since TIME',
+      :short => '-s TIME',
+      :required => false,
+      :description => 'Find alerts since the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
 
-      option :before,
-        :long => '--before TIME',
-        :short => '-b TIME',
-        :required => false,
-        :description => 'Find alerts before the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
+    option :before,
+      :long => '--before TIME',
+      :short => '-b TIME',
+      :required => false,
+      :description => 'Find alerts before the time provided (format: YYYY-MM-DDThh:mm:ssZ).'
 
-      option :page,
-        :long => '--page N',
-        :short => '-p N',
-        :required => false,
-        :description => 'Specifies the page to be returned from the database. The default is 1.'
+    option :page,
+      :long => '--page N',
+      :short => '-p N',
+      :required => false,
+      :description => 'Specifies the page to be returned from the database. The default is 1.'
 
-      def run
-        validate_and_set_params
+    def run
+      validate_and_set_params
 
-        @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
+      @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
 
-        alerts = @rest.get("alerts#{query_params}")
-        output(alerts)
-      end
+      alerts = @rest.get("alerts#{query_params}")
+      output(alerts)
+    end
 
-      private
+    private
 
-      def query_params
-        query_params = []
-        query_params << "before=#{config[:before]}" if config[:before]
-        query_params << "since=#{config[:since]}" if config[:since]
-        query_params << "page=#{config[:page]}" if config[:page]
-        return '' if query_params.empty?
+    def query_params
+      query_params = []
+      query_params << "before=#{config[:before]}" if config[:before]
+      query_params << "since=#{config[:since]}" if config[:since]
+      query_params << "page=#{config[:page]}" if config[:page]
+      return '' if query_params.empty?
 
-        "?#{query_params.join('&')}"
-      end
+      "?#{query_params.join('&')}"
     end
   end
 end
-

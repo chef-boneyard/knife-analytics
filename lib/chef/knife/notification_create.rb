@@ -18,30 +18,28 @@
 require 'chef-analytics'
 require 'json'
 
-class Chef
-  class Knife
-    class NotificationCreate < ChefAnalytics::Knife
-      category "CHEF ANALYTICS"
+module KnifeAnalytics
+  class NotificationCreate < KnifeAnalytics::Knife
+    category "CHEF ANALYTICS"
 
-      banner "knife notification create <notification.json>"
+    banner "knife notification create <notification.json>"
 
-      option :identity_server_url,
-        :long         => "--identity-server-url HOST",
-        :description  => "URL of Chef identity server to use"
+    option :identity_server_url,
+      :long         => "--identity-server-url HOST",
+      :description  => "URL of Chef identity server to use"
 
-      option :analytics_server_url,
-        :long         => "--analytics-server-url HOST",
-        :description  => "URL of Chef analytics server to use"
+    option :analytics_server_url,
+      :long         => "--analytics-server-url HOST",
+      :description  => "URL of Chef analytics server to use"
 
-      def run
-        validate_and_set_params
+    def run
+      validate_and_set_params
 
-        @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
+      @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
 
-        headers = {"Content-Type" => "application/json"}
-        response = @rest.post("/aliases", File.read(name_args[0]), headers)
-        output(response)
-      end
+      headers = {"Content-Type" => "application/json"}
+      response = @rest.post("/aliases", File.read(name_args[0]), headers)
+      output(response)
     end
   end
 end

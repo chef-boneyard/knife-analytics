@@ -17,33 +17,30 @@
 
 require 'chef-analytics'
 
-class Chef
-  class Knife
-    class RuleList < ChefAnalytics::Knife
-      category "CHEF ANALYTICS"
+module KnifeAnalytics
+  class RuleList < KnifeAnalytics::Knife
+    category "CHEF ANALYTICS"
 
-      banner "knife rule list"
+    banner "knife rule list"
 
-      option :identity_server_url,
-        :long         => "--identity-server-url HOST",
-        :description  => "URL of Chef identity server to use"
+    option :identity_server_url,
+      :long         => "--identity-server-url HOST",
+      :description  => "URL of Chef identity server to use"
 
-      option :analytics_server_url,
-        :long         => "--analytics-server-url HOST",
-        :description  => "URL of Chef analytics server to use"
+    option :analytics_server_url,
+      :long         => "--analytics-server-url HOST",
+      :description  => "URL of Chef analytics server to use"
 
-      def run
-        validate_and_set_params
+    def run
+      validate_and_set_params
 
-        @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
+      @rest = ChefAnalytics::ServerAPI.new(analytics_server_url, fetch_token)
 
-        rules = @rest.get("rules")
-        output(rules)
-      end
-
-      private
-
+      rules = @rest.get("rules")
+      output(rules)
     end
+
+    private
+
   end
 end
-
